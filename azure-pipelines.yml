@@ -4,6 +4,7 @@ trigger:
      - main
 pool: agent-pool
 variables:
+- group: New variable group 03-Jun
 - name: agent
   value: agent-pool
 parameters:
@@ -19,4 +20,8 @@ parameters:
   type: boolean
   default: false
 stages:
-- stage: 
+- stage: planstage
+  jobs:
+  - job: inittoplnjob
+    steps:
+    
