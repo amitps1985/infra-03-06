@@ -22,6 +22,21 @@ parameters:
 stages:
 - stage: planstage
   jobs:
-  - job: inittoplnjob
+  - job: installinstalljob
     steps:
-    
+    - task: TerraformInstaller@1
+      displayName: terraform install
+      inputs:
+        terraformVersion: 'latest'
+    - task: TerraformTask@5
+      displayName: terraform init
+      inputs:
+        provider: 'azurerm'
+        command: 'init'
+        workingDirectory: '$(System.DefaultWorkingDirectory)/environment /dev/'
+        backendServiceArm: 'Azure subscription 1 (34cc9902-c707-4432-93a5-d466f2a325ab)'
+        backendAzureRmOverrideSubscriptionID: '34cc9902-c707-4432-93a5-d466f2a325ab'
+        backendAzureRmResourceGroupName: 'edfusion-rg'
+        backendAzureRmStorageAccountName: 'stg233001'
+        backendAzureRmContainerName: 'container'
+        backendAzureRmKey: 'dev.terraform.tfstate'
