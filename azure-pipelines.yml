@@ -1,0 +1,22 @@
+trigger:
+ branches:
+   include:
+     - main
+pool: agent-pool
+variables:
+- name: agent
+  value: agent-pool
+parameters:
+- name: env
+  displayName: select environment
+  values:
+    - dev
+    - UAT
+    - prod
+  default: dev
+- name: runapply
+  displayName: Run Apply?
+  type: boolean
+  default: false
+stages:
+- stage: 
